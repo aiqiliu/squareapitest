@@ -9,22 +9,27 @@
     <!-- link to the SqPaymentForm library -->
     <script type="text/javascript" src="https://js.squareup.com/v2/paymentform"></script>
 
-    <!-- link to the local SqPaymentForm initialization -->
-    <script type="text/javascript" src="/sqpaymentform.js"></script>
-
     <!-- link to the custom styles for SqPaymentForm -->
     <link rel="stylesheet" type="text/css" href="/sqpaymentform.css">
   </head>
 
   <body>
+
     <div id="sq-ccbox">
       <!--
         You should replace the action attribute of the form with the path of
         the URL you want to POST the nonce to (for example, "/process-card")
       -->
-      <form id="nonce-form" novalidate action="/cgi-bin/process_card.py" method="post">
+      <form id="nonce-form" novalidate action="/cgi-bin/process_card.py" method="post" >
 
-        Pay with a Credit Card
+       <h2> Pay with a Credit Card </h2>
+
+       <div>
+        <td>Choose Donation Amount:
+        <input type = "radio" name = "amount" value = 5 /> $5
+        <input type = "radio" name = "amount" value = 10 /> $10
+        </td>
+      </div>
 
         <table>
         <tbody>
@@ -45,6 +50,28 @@
             <td><div id="sq-postal-code"></div></td>
           </tr>
           <tr>
+            <td>
+              <input id="checkBox" type="checkbox" onclick="showDiv()"> Sign me up for Monthly Donation
+              <input type="hidden" id="box" name="boxChecked">
+            </td>
+          </tr>
+
+           <tr>
+            <td>
+                First name: <input id="firstname type="text" name="firstname">
+            </td>
+
+              <td>
+                Last name: <input id="lastname" type="text" name="lastname">
+
+            </td>
+
+            <td>
+              Email: <input id="email" type="text" name="email">
+            </td>
+            </tr>
+
+          <tr>
             <td colspan="2">
               <button id="sq-creditcard" class="button-credit-card" onclick="requestCardNonce(event)">
                 Pay with card
@@ -62,16 +89,20 @@
       </form>
     </div>
 
-    <div id="sq-walletbox">
+<!--     <div id="sq-walletbox">
       Pay with a Digital Wallet
 
       <div id="sq-apple-pay-label" class="wallet-not-enabled">Apple Pay for Web not enabled</div>
-      <!-- Placholder for Apple Pay for Web button -->
       <button id="sq-apple-pay" class="button-apple-pay"></button>
 
-<!--       <div id="sq-masterpass-label" class="wallet-not-enabled">Masterpass not enabled</div>
-      Placholder for Masterpass button
-      <button id="sq-masterpass" class="button-masterpass"></button> -->
-    </div>
+    </div> -->
+
+    <form id="show-transactions" action="/cgi-bin/list_refunds.py" method="post" >
+       <button id="sq-creditcard" class="button-credit-card" type="submit">
+                Show all Donations
+        </button>
+    </form>
+        <!-- link to the local SqPaymentForm initialization -->
+    <script type="text/javascript" src="/sqpaymentform.js"></script>
   </body>
 </html>

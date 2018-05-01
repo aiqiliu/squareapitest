@@ -22,6 +22,23 @@ function requestCardNonce(event) {
   paymentForm.requestCardNonce();
 }
 
+function showDiv() {
+  // var checkBox = document.getElementById("box");
+  // var customerInfo = document.getElementById("customer-info");
+
+    // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    // customerInfo.style.display = "block";
+    // checkBox.value = true;
+    document.getElementById("box").value = "true";
+  } else {
+    // customerInfo.style.display = "none";
+    // checkBox.value = false;
+    document.getElementById("box").value = "false";
+  }
+
+}
+
 // Create and initialize a payment form object
 var paymentForm = new SqPaymentForm({
 
@@ -71,23 +88,17 @@ var paymentForm = new SqPaymentForm({
      */
     methodsSupported: function (methods) {
 
-      var applePayBtn = document.getElementById('sq-apple-pay');
-      var applePayLabel = document.getElementById('sq-apple-pay-label');
-      var masterpassBtn = document.getElementById('sq-masterpass');
-      var masterpassLabel = document.getElementById('sq-masterpass-label');
+      // var applePayBtn = document.getElementById('sq-apple-pay');
+      // var applePayLabel = document.getElementById('sq-apple-pay-label');
 
-      // Only show the button if Apple Pay for Web is enabled
-      // Otherwise, display the wallet not enabled message.
-      if (methods.applePay === true) {
-        applePayBtn.style.display = 'inline-block';
-        applePayLabel.style.display = 'none' ;
-      }
-      // Only show the button if Masterpass is enabled
-      // Otherwise, display the wallet not enabled message.
-      // if (methods.masterpass === true) {
-      //   masterpassBtn.style.display = 'inline-block';
-      //   masterpassLabel.style.display = 'none';
+
+      // // Only show the button if Apple Pay for Web is enabled
+      // // Otherwise, display the wallet not enabled message.
+      // if (methods.applePay === true) {
+      //   applePayBtn.style.display = 'inline-block';
+      //   applePayLabel.style.display = 'none' ;
       // }
+
     },
 
     /*
@@ -98,33 +109,33 @@ var paymentForm = new SqPaymentForm({
       // The payment request below is provided as
       // guidance. You should add code to create the object
       // programmatically.
-      return {
-        requestShippingAddress: true,
-        currencyCode: "USD",
-        countryCode: "US",
-        total: {
-          label: "Hakuna",
-          amount: "{{REPLACE_ME}}",
-          pending: false,
-        },
-        lineItems: [
-          {
-            label: "Subtotal",
-            amount: "{{REPLACE_ME}}",
-            pending: false,
-          },
-          {
-            label: "Shipping",
-            amount: "{{REPLACE_ME}}",
-            pending: true,
-          },
-          {
-            label: "Tax",
-            amount: "{{REPLACE_ME}}",
-            pending: false,
-          }
-        ]
-      };
+      // return {
+      //   requestShippingAddress: true,
+      //   currencyCode: "USD",
+      //   countryCode: "US",
+      //   total: {
+      //     label: "Hakuna",
+      //     amount: "{{REPLACE_ME}}",
+      //     pending: false,
+      //   },
+      //   lineItems: [
+      //     {
+      //       label: "Subtotal",
+      //       amount: "{{REPLACE_ME}}",
+      //       pending: false,
+      //     },
+      //     {
+      //       label: "Shipping",
+      //       amount: "{{REPLACE_ME}}",
+      //       pending: true,
+      //     },
+      //     {
+      //       label: "Tax",
+      //       amount: "{{REPLACE_ME}}",
+      //       pending: false,
+      //     }
+      //   ]
+      // };
     },
 
     /*
@@ -146,6 +157,19 @@ var paymentForm = new SqPaymentForm({
 
       // Assign the nonce value to the hidden form field
       document.getElementById('card-nonce').value = nonce;
+
+      var checkbox = document.getElementById("checkBox");
+      if (checkbox.value == true) {
+        var firstName = document.getElementById("firstname");
+        var lastName = document.getElementById("lastname");
+        var email = document.getElementById("email");
+        // var box = document.getElementById("box");
+
+        document.getElementById('firstname').value = firstName;
+        document.getElementById('lastname').value = lastName;
+        document.getElementById('email').value = email;
+        // document.getElementById('box').value = "true";
+      }
 
       // POST the nonce form to the payment processing page
       document.getElementById('nonce-form').submit();
